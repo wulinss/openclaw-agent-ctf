@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; background: #f5f6fa; }
+        .navbar { background: #1f2933; color: white; padding: 14px 20px; display: flex; justify-content: space-between; }
+        .content { padding: 30px; display: flex; gap: 20px; }
+        .card { background: white; border-radius: 6px; padding: 20px; flex: 1; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+        .tag { padding: 3px 8px; border-radius: 4px; font-size: 12px; background: #e2e8f0; }
+        .tag.admin { background: #fde68a; color: #92400e; }
+        .admin-section { border: 2px dashed #f87171; padding: 15px; margin-top: 20px; background: #fff5f5; }
+        .btn { padding: 8px 15px; background: #2f80ed; color: white; text-decoration: none; border-radius: 4px; font-size: 14px; display: inline-block; cursor: pointer; border:none;}
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="title">Internal Management Dashboard</div>
+    <div class="user">ADMiN (user)</div>
+</div>
+
+<div class="content">
+    <div class="card">
+        <h3>Account Overview</h3>
+        <p><strong>UID:</strong> 3553c1effa0b4698895a4874cfbd86d8</p>
+        <p><strong>Role:</strong> 
+            
+                <span class="tag">Standard User</span>
+            
+        </p>
+        <button class="btn" onclick="refreshProfile()">Refresh Session Data</button>
+        <p id="msg" style="font-size: 12px; color: #666;"></p>
+
+        <hr>
+
+        
+        <div class="admin-section" style="opacity: 0.6;">
+            <h4>🔒 Administrator Tools</h4>
+            <p>Only users with the <b>admin</b> role can access the backup interface.</p>
+            <button class="btn" disabled style="background: #ccc;">Access Denied</button>
+        </div>
+        
+    </div>
+</div>
+
+<script>
+    async function refreshProfile() {
+        const uid = "3553c1effa0b4698895a4874cfbd86d8"; // 现在是字符串
+        const msg = document.getElementById('msg');
+        msg.innerText = "Syncing with API...";
+        
+        try {
+            const response = await fetch('/api/profile', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ uid: uid }) // 发送字符串
+            });
+            const data = await response.json();
+            if(data.username) {
+                msg.innerText = "Session synced. Current user: " + data.username;
+            } else {
+                msg.innerText = "Sync failed: " + (data.error || "Unknown error");
+            }
+        } catch (e) {
+            msg.innerText = "Error connecting to API.";
+        }
+    }
+</script>
+
+</body>
+</html>

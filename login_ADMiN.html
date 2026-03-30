@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internal Management System</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f4f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 360px;
+            margin: 120px auto;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 18px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2f80ed;
+            border: none;
+            color: white;
+            font-size: 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #256ad3;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Internal System Login</h2>
+    <form method="POST" action="/login">
+        <label for="uid">User ID</label>
+        <input type="text" id="uid" name="uid" placeholder="Enter your UID">
+
+        <button type="submit">Sign In</button>
+    </form>
+    <div class="footer">
+        Don't have a UID? <a href="/register">Register here</a><br><br>
+        © Internal Use Only
+    </div>
+</div>
+
+</body>
+</html>
